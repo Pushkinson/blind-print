@@ -10,14 +10,6 @@
             :key="symbolItem.id"
             :symbolItem="symbolItem"
           />
-          <!--
-            :color="isColored"
-            :bpItem="myString"
-             v-for="symbolItem in myString"
-            :key="symbolItem.id"
-                        v-for="contentItem in ITEM"
-            :key="contentItem"
-            :contentItem="item" -->
           <div class="main__content_data">
             <div class="main__content_speed"></div>
             <div class="main__content_accuracy"></div>
@@ -91,7 +83,6 @@ export default {
       }
 
       return {"speed": currentSpeed, "accuracy": currentAccuracy}
-      // return this.inputs.length;
     }
   },
 
@@ -145,121 +136,6 @@ export default {
     }
 
   }
-
-
-
-
-
-
-
-
-
-
-
-  // data() {
-  //   return {
-  //     randomIndex: 0,
-  //     myString: 'Hello',
-  //     isColored: true,
-  //     currentSymbos: -1,
-  //     customArray: rawData,
-  //   }
-  // },
-
-  // components: {
-  //   AppContent,
-  // },
-
-  // computed: {
-  //   ...mapGetters([
-  //     'ITEMS',
-  //     // 'ITEM',
-  //     'ITEM_VAL'
-  //   ]),
-
-  //   // s
-
-  //    // this.ITEM.content.filte
-  //   //   return Array.from(this.ITEM.content);
-
-  //   item: function() {
-
-  //     let item = [...rawData];
-
-  //     return item;
-
-
-
-
-  //     // return {};
-  //   //   let arr = [];
-  //   //   for (let i=0; i < this.ITEMS[this.randomIndex].content.length; i++) {
-  //   //     arr.push({value: this.ITEMS[this.randomIndex].content[i], isColored: false });
-  //   //   }
-  //   // let arr = [];
-
-  //   // this.ITEM.content.filte
-  //   //   return Array.from(this.ITEM.content);
-
-  //     // for (let i=0; i < this.ITEM_VAL; i++) {
-  //     //   arr.push({value: this.ITEM.content[i], isColored: i <= this.currentSymbos });
-  //     // }
-
-  //     // return arr;
-
-
-  //     // let arr = [];
-  //     // for (let i=0; i < this.myString.length; i++) {
-  //     //   arr.push({value: "" + this.myString[i], isColored: i <= this.currentSymbos });
-  //     // }
-
-  //     // return arr;
-
-  //     // return console.log(rawDataItems);
-  //     // return Array.from(this.myString);
-  //     // return this.ITEMS[this.randomIndex].content;
-  //   }
-  // },
-
-  // methods: {
-  //   ...mapActions([
-  //     'GET_ITEMS_FROM_API'
-  //   ]),
-
-  //   clickFunction() {
-  //     // this.randomIndex = Math.floor( Math.random() * this.ITEMS.length );
-  //   },
-
-  //   onInput(e) {
-  //     // let randVal = this.ITEM.content;
-
-  //     console.log(String.fromCharCode(e.keyCode));
-  //     // console.log(randVal);
-
-  //   //   if (randVal[this.currentSymbos + 1] === String.fromCharCode(e.keyCode)) {
-  //   //     this.currentSymbos += 1;
-  //   }
-  // },
-
-  // mounted() {
-  //   // let rawDataItems = this.ITEMS[this.randomIndex].content;
-  //   this.GET_ITEMS_FROM_API();
-  //   // let rawDataItems = this.randomItemByIndex();
-
-  //   // this.myString = rawDataItems.content;
-  //   // let randVal = this.ITEM.content;
-
-  //   // window.addEventListener("keypress", e => {
-  //   //   console.log(String.fromCharCode(e.keyCode));
-  //   //   console.log(randVal);
-
-  //   //   if (randVal[this.currentSymbos + 1] === String.fromCharCode(e.keyCode)) {
-  //   //     this.currentSymbos += 1;
-  //   //   }
-  //   // });
-
-  //   window.addEventListener("keypress", this.onInput);
-  // }
 }
 
 </script>

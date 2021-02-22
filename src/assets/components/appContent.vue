@@ -1,6 +1,5 @@
 <template>
     <p class="symbol" :class="{['red']: this.symbolItem.isColored}">{{ this.symbolItem.value }}</p>
-    <!--  -->
 </template>
 
 <script>
