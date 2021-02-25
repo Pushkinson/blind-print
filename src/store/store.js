@@ -4,6 +4,10 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
+// Хранилище состояний клиентского приложения
+
+// Postman - проверка серверных данных
+
 let store = new Vuex.Store({
   state: {
       items: [],
@@ -12,10 +16,7 @@ let store = new Vuex.Store({
   },
   mutations: {
       SET_ITEMS_TO_STATE: (state, items) => {
-        // debugger;
           state.items = items;
-          // state.item = items[0];
-          state.itemVal = state.items.content.length;
 
       },
   },
@@ -26,8 +27,8 @@ let store = new Vuex.Store({
           })
           .then((items) => {
 
-            let randomIndex = Math.floor( Math.random() * items.data.length );
-            let arr = items.data[randomIndex];
+            const randomIndex = Math.floor(Math.random() * items.data.length);
+            const arr = items.data[randomIndex];
 
             commit('SET_ITEMS_TO_STATE', arr);
 
@@ -42,26 +43,6 @@ let store = new Vuex.Store({
     ITEMS(state) {
         return state.items;
     },
-
-    // ITEM(state) {
-    //     return state.item;
-    // },
-
-    ITEM_VAL(state) {
-        return state.itemVal;
-    }
-    // randomItem: state => {
-    //     let randomIndex = Math.floor( Math.random() * state.items.length );
-    //     return state.items.filter((el, index) => {
-    //         return index === randomIndex;
-    //     })
-    // },
-    // randomItemByIndex: state => {
-        // let randomIndex = Math.floor( Math.random() * state.items.length );
-            // return state.items.find((el, index) => {
-            //     return index === randomIndex;
-            // })
-    // }
   },
 });
 

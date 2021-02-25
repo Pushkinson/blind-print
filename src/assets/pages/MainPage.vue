@@ -1,6 +1,5 @@
 <template>
-  <div class="main"
-  >
+  <div class="main">
     <div class="main__wrapper">
       <div class="main__header"></div>
       <div class="main__content">
@@ -10,17 +9,17 @@
             :key="symbolItem.id"
             :symbolItem="symbolItem"
           />
-          <div class="main__content_data">
-            <div class="main__content_speed"></div>
-            <div class="main__content_accuracy"></div>
-            <div class="main__content__button-start button">
-              <button
-                @click="clickFunction"
-              >click</button></div>
-              <!--  -->
-            <div class="main__content__button-refresh button"></div>
-            <div class="speed">{{ calculateSpeed }}</div>
+        </div>
+        <div class="main__content_data">
+          <div class="main__content_speed"></div>
+          <div class="main__content_accuracy"></div>
+          <div class="main__content__button-start button">
+            <button @click="clickFunction">
+              click
+            </button>
           </div>
+          <div class="main__content__button-refresh button"></div>
+          <div class="speed">{{ calculateSpeed }}</div>
         </div>
       </div>
     </div>
@@ -37,7 +36,7 @@ export default {
   data() {
     return {
       rawData: '',
-      currentSymbos: -1,
+      currentSymbolIndex: -1,
       inputs: [],
       timestamp: 0,
     }
@@ -54,11 +53,11 @@ export default {
     ]),
 
     getTransformationData() {
-      let arr = [];
+      const arr = [];
 
-      for (let i=0; i<this.rawData.length; i++) {
-        arr.push({ "value": this.rawData[i], "isColored": this.currentSymbos >= i, "id": i})
-      }
+    this.rawData.split('').forEach((item, index) => {
+      arr.push({ "value": item, "isColored": this.currentSymbolIndex >= index, "id": index})
+    });
 
       return arr;
     },
@@ -69,13 +68,14 @@ export default {
       let prevTimestamp = this.timestamp - 1000*60;
       let currentTimestump = this.timestamp;
 
-      for (let i = 0; i < this.inputs.length; i++) {
-        if (this.inputs[i].timestamp <= currentTimestump && this.inputs[i].timestamp >= prevTimestamp) {
-          currentSpeed += this.inputs[i].isCurrect ? 1 : 0;
+      this.inputs.forEach((item) => {
+        if (item.timestamp <= currentTimestump && item.timestamp >= prevTimestamp) {
+          currentSpeed += item.isCurrect ? 1 : 0;
         }
 
-        currentAccuracy += this.inputs[i].isCurrect ? 1 : 0;
-      }
+        currentAccuracy += item.isCurrect ? 1 : 0;
+      });
+
       if (this.inputs.length !== 0) {
         currentAccuracy = Math.floor((currentAccuracy / this.inputs.length)*100).toFixed(1);
       } else {
@@ -83,7 +83,7 @@ export default {
       }
 
       return {"speed": currentSpeed, "accuracy": currentAccuracy}
-    }
+    },
   },
 
   methods: {
@@ -92,20 +92,17 @@ export default {
     ]),
 
     onInput(e) {
-      // Запустить таймер по клику
-
       this.timestamp = new Date().getTime();
 
-      let boolIsCurrect = this.rawData[this.currentSymbos + 1] === String.fromCharCode(e.keyCode);
+      let boolIsCurrect = this.rawData[this.currentSymbolIndex + 1] === String.fromCharCode(e.keyCode);
 
       if (boolIsCurrect) {
-        this.currentSymbos += 1;
+        this.currentSymbolIndex += 1;
       }
 
     let timestamp = new Date();
 
     this.inputs.push({ "timestamp": timestamp.getTime(), "isCurrect": boolIsCurrect})
-      // Если достигнут конец строки, остановить таймер
     },
 
     clickFunction() {
@@ -128,11 +125,10 @@ export default {
 
   watch: {
     ITEMS: function(value) {
-      this.currentSymbos = -1;
+      this.currentSymbolIndex = -1;
       this.rawData = value.content;
       this.inputs = [];
       this.timestamp = new Date().getTime();
-      // остановить таймер, когда данные получены
     }
 
   }
@@ -141,7 +137,12 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.main__content__text
-  display: flex
-  flex-wrap: wrap
+.main
+  background-color: #eee
+  &__wrapper
+    margin: 0 10px
+  &__content__text
+    display: flex
+    flex-wrap: wrap
+    align-items: center
 </style>
